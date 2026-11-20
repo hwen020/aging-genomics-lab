@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+output/*
+!output/.gitkeep
+.DS_Store
+.streamlit/secrets.toml
+.env
+*.log
+data/cache/

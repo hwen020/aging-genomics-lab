@@ -1,0 +1,10 @@
+{
+  "dataset_id": "SYNTHETIC_AGING_DEMO_V1",
+  "data_origin": "synthetic",
+  "human_subjects": false,
+  "method": "numpy seeded Gaussian log2 scale, group shifts and age trends",
+  "seed": 20261119,
+  "meaning": "Software validation and presentation ONLY; no real biological claims",
+  "expression_scale": "normalized_log2_like_simulated_values",
+  "license": "CC0-1.0"
+}
