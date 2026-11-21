@@ -2,6 +2,8 @@
 
 **Reproducible age-association analysis · v0.3.1**
 
+[Live Demo](https://aging-genomics-lab.onrender.com) · [GitHub Actions](https://github.com/hwen020/aging-genomics-lab/actions/workflows/ci.yml)
+
 An open-source research software workbench for analyzing age associations in public human gene expression and DNA methylation cohorts. The project combines a Streamlit interface, reproducible Python CLI, verified GEO ingestion, statistical checks, and provenance exports.
 
 The **Public Study** workspace includes two workflows. **Expression Analysis** examines age and human rectus abdominis expression in GSE5086. **Methylation Analysis** tests age associations in whole-blood CpG methylation in GSE40279. The **Synthetic Demo** uses generated samples and runs offline.
