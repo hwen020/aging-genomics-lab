@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "Cite this software and the original GEO study when using its analyses."
+title: Aging Genomics Lab
+type: software
+authors:
+  - name: Research Software Portfolio
+version: 0.3.1
+license: MIT
+date-released: 2026-11-20
+references:
+  - type: article
+    title: Transcriptional Profiling of Aging in Human Muscle Reveals a Common Aging Signature
+    authors:
+      - family-names: Zahn
+        given-names: Jacob M.
+    doi: 10.1371/journal.pgen.0020115
+    year: 2006
+  - type: article
+    title: Genome-wide Methylation Profiles Reveal Quantitative Views of Human Aging Rates
+    authors:
+      - family-names: Hannum
+        given-names: Gregory
+    doi: 10.1016/j.molcel.2012.10.016
+    year: 2013

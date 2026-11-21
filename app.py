@@ -4,6 +4,7 @@ from __future__ import annotations
 from io import BytesIO
 import hashlib
 import json
+import os
 from zipfile import ZIP_DEFLATED, ZipFile
 
 import numpy as np
@@ -90,11 +91,19 @@ def archive_bytes(ds, de, age, pca, qc, ref, tgt, input_hashes) -> bytes:
     return bio.getvalue()
 
 
-mode = st.sidebar.radio("Workspace", ["Synthetic Demo / CSV upload", "Public Study"])
+portfolio = os.getenv("AGING_GENOMICS_MODE", "research") != "research"
+if portfolio:
+    st.sidebar.caption("Portfolio Demo · public snapshots")
+mode = st.sidebar.radio("Workspace", ["Synthetic Demo" if portfolio else "Synthetic Demo / CSV upload", "Public Study"])
 if mode == "Public Study":
-    from aginggenomics.public_dashboard import render_public_study
+    if portfolio:
+        from aginggenomics.portfolio_dashboard import render_portfolio
 
-    render_public_study(style_fig)
+        render_portfolio(style_fig)
+    else:
+        from aginggenomics.public_dashboard import render_public_study
+
+        render_public_study(style_fig)
     st.stop()
 
 
@@ -102,17 +111,20 @@ with st.sidebar:
     st.markdown("### 🧬 AGING GENOMICS")
     st.caption("RESEARCH SOFTWARE · v" + __version__)
     st.divider()
-    st.subheader("Dataset")
-    st.caption("Upload **both** CSV files for your own pre-normalized log2 expression data.")
-    uploaded_expr = st.file_uploader("Expression matrix", type="csv", key="expression")
-    uploaded_meta = st.file_uploader("Sample metadata", type="csv", key="metadata")
-    st.caption("Expected: gene_id × sample columns, and sample_id / group / age metadata.")
+    uploaded_expr = uploaded_meta = None
+    if not portfolio:
+        st.subheader("Dataset")
+        st.caption("Upload **both** CSV files for your own pre-normalized log2 expression data.")
+        uploaded_expr = st.file_uploader("Expression matrix", type="csv", key="expression")
+        uploaded_meta = st.file_uploader("Sample metadata", type="csv", key="metadata")
+        st.caption("Expected: gene_id × sample columns, and sample_id / group / age metadata.")
     st.divider()
     st.markdown("**Analysis defaults**")
     fdr_threshold = st.slider("FDR cutoff", 0.01, 0.20, 0.05, 0.01)
     effect_threshold = st.slider("Minimum |log2 difference|", 0.0, 2.0, 0.5, 0.1)
     st.divider()
-    st.caption("No user uploads are saved by this app. Local hosting only unless you choose to deploy it.")
+    if not portfolio:
+        st.caption("No user uploads are saved by this app. Local hosting only unless you choose to deploy it.")
 
 if bool(uploaded_expr) != bool(uploaded_meta):
     st.info("Upload the expression matrix **and** metadata file to switch from the simulated demo.")

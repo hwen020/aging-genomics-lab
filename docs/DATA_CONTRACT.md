@@ -24,3 +24,7 @@ When converting a real GEO study, record: GEO accession, paper DOI, download tim
 GSE5086 is routed through a pinned study-specific parser. The source uses GPL570 probe IDs. Exports keep the existing `gene_id` result key and add platform `gene_symbol` and `entrez_id` annotations. Tables preserve GSM identifiers and the inclusion and exclusion log. The source artifacts stay under `data/cache/`.
 
 A public RNA-seq raw-count matrix must be routed to the planned count-aware DESeq2/edgeR backend instead of being silently log2-transformed for Welch tests. The current cutoff check for huge matrix values is merely a heuristic, **not** a sufficient raw-count detector. The UI requires an explicit normalized-log2-scale confirmation for imported datasets; the CLI requires `--ack-normalized-log2` when the data are not marked synthetic.
+
+## P2 methylation contract
+
+The independent GSE40279 entry point accepts the pinned, gzipped, tab-delimited GEO matrix with `ID_REF` and one submitter ID column per sample. It verifies IDs against GSM metadata and the sample key, and expects 473,034 submitted probe rows. Raw beta entries denote fractions in [0,1]. A fixed float64 buffer holds 512 probes by default and at most 2,048. The reader validates each row width and numeric tokens before that row enters the block. Explicit missing tokens enter the probe QC checks. Derived M-values are temporary model inputs. Archived result, sample and QC tables retain accession or CpG keys and remain in the ignored results directory.

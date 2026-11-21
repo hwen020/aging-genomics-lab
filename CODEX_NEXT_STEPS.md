@@ -25,9 +25,9 @@
 - 提供可照做的 Windows VS Code 运行步骤，不要求用户提供 API key。
 - Codex 完成后报告具体修改、测试数量、结果路径、实际使用的公开研究 accession 和局限性。**如未实际下载、验证真实数据，请明确未完成，不得宣称已完成。**
 
-## After P1 (do not implement yet)
+## Delivered milestones and next work
 
-**P2: EWAS / methylation.** Review the GSE40279 accession, paper, public-use conditions, age/sex metadata, platform annotation and cell-composition inputs. Pin official assets and build a separate methylation data contract for beta values and sample metadata. Define probe and sample QC, a prespecified covariate-aware association design, multiple-testing correction and sensitivity analyses. Validate model assumptions, compare effect estimates with the original study where feasible, and export provenance and exclusion logs. Acceptance requires offline fixture tests, a verified public-data run and separate reporting in the workbench. Epigenetic-age modeling can follow after the EWAS validation.
+**Delivered in v0.3.0.** P1.1 provides a Zahn Table S2 independent audit. P2 adds the verified GSE40279 full-cohort EWAS, complete-case probe QC, age inference adjusted for sex and plate, and browser and CLI reporting. A future EWAS sensitivity analysis should validate a reference-based blood-cell deconvolution and a documented cross-reactivity mask before refitting. Epigenetic-clock training remains a separate prediction task and would require held-out validation.
 
 **P3: GWAS/TWAS.** Public summary statistics import, Manhattan/QQ, valid coordinate build, significance thresholds, optional locus summaries; no private genotype data, no fabricated ancestry claims.
 

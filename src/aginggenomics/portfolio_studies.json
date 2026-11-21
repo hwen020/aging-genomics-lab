@@ -1,0 +1,194 @@
+{
+  "GSE5086": {
+    "accession": "GSE5086",
+    "source": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE5086",
+    "paper": "https://doi.org/10.1371/journal.pgen.0020115",
+    "generated_utc": "2026-11-21T00:03:05.265949+00:00",
+    "analysis_version": "0.3.1",
+    "samples": 62,
+    "tests": 54615,
+    "fdr_hits": 0,
+    "fdr_threshold": 0.05,
+    "formula": "log2_intensity ~ 1 + centered_age_years / 10 + I(sex = Male)",
+    "limitations": [
+      "Exploratory cross-sectional associations. The age-group contrast is defined by age.",
+      "Sex is adjusted for. Batch information is unavailable. Other confounding may remain.",
+      "The 65-year cutoff is a project choice. The probe-level models do not reproduce the paper's gene-level tests.",
+      "Probe mappings can be ambiguous or missing. Results support no causal or clinical inference.",
+      "A lack of FDR-significant probes does not establish the absence of an age association."
+    ],
+    "p_histogram": [
+      3629,
+      3050,
+      3127,
+      3053,
+      3128,
+      3041,
+      3017,
+      2966,
+      2781,
+      2786,
+      2505,
+      2612,
+      2500,
+      2382,
+      2442,
+      2304,
+      2329,
+      2313,
+      2324,
+      2326
+    ],
+    "examples": [
+      {
+        "feature_id": "205372_at",
+        "effect_per_decade": 0.27984283034075497,
+        "p_value": 2.0233469358209493e-06,
+        "fdr": 0.08584277339643608
+      },
+      {
+        "feature_id": "244859_at",
+        "effect_per_decade": 0.16556644029560116,
+        "p_value": 3.1435603184632822e-06,
+        "fdr": 0.08584277339643608
+      },
+      {
+        "feature_id": "207145_at",
+        "effect_per_decade": -0.4791279330429408,
+        "p_value": 1.129722912287893e-05,
+        "fdr": 0.10114814504969143
+      },
+      {
+        "feature_id": "215439_x_at",
+        "effect_per_decade": 0.09885084100941995,
+        "p_value": 1.0882370057143354e-05,
+        "fdr": 0.10114814504969143
+      },
+      {
+        "feature_id": "217779_s_at",
+        "effect_per_decade": 0.128764493029471,
+        "p_value": 1.2964149324321891e-05,
+        "fdr": 0.10114814504969143
+      },
+      {
+        "feature_id": "218145_at",
+        "effect_per_decade": 0.09415476309828319,
+        "p_value": 5.962647918011465e-06,
+        "fdr": 0.10114814504969143
+      },
+      {
+        "feature_id": "232436_at",
+        "effect_per_decade": 0.08050390214250508,
+        "p_value": 1.0675235806364934e-05,
+        "fdr": 0.10114814504969143
+      },
+      {
+        "feature_id": "1563468_at",
+        "effect_per_decade": 0.26307988236448915,
+        "p_value": 2.124094006205821e-05,
+        "fdr": 0.10602478613028694
+      }
+    ],
+    "result_sha256": "3571805e94e383a7da2a167d3c822f1466aecfe998496f8941ffb7cb6ff2eaad",
+    "published_comparison": {
+      "published_rows": 250,
+      "matched_published_rows": 113,
+      "unique_matched_probes": 219,
+      "matched_pairs": 219,
+      "same_direction_pairs": 196,
+      "local_age_fdr_hits": 0,
+      "linked_age_fdr_hits": 0
+    }
+  },
+  "GSE40279": {
+    "accession": "GSE40279",
+    "source": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40279",
+    "paper": "https://doi.org/10.1016/j.molcel.2012.10.016",
+    "generated_utc": "2026-11-21T00:11:48.678460+00:00",
+    "analysis_version": "0.3.1",
+    "samples": 656,
+    "tests": 424870,
+    "fdr_hits": 58849,
+    "fdr_threshold": 0.05,
+    "formula": "M ~ centered_age_per_decade + sex + C(plate)",
+    "limitations": [
+      "Whole-blood cell proportions are unavailable. Age-related changes in cell mixture may confound associations.",
+      "The model adjusts for submitted sex and plate. Ethnicity is nested within plate in this cohort, and recruitment source and plate overlap strongly.",
+      "Processed beta values support range, missingness, variability and annotation QC. Detection p-values, bead counts and cross-reactivity masks were unavailable to this workflow.",
+      "Results reflect a cross-sectional association study. They do not estimate biological age or establish causality."
+    ],
+    "p_histogram": [
+      99883,
+      28151,
+      23423,
+      21278,
+      19607,
+      18080,
+      17689,
+      17015,
+      16058,
+      15955,
+      15666,
+      15179,
+      15026,
+      15028,
+      14610,
+      14641,
+      14495,
+      14388,
+      14383,
+      14315
+    ],
+    "examples": [
+      {
+        "feature_id": "cg16867657",
+        "effect_per_decade": 0.2789851775229707,
+        "p_value": 2.5616393213247142e-101,
+        "fdr": 1.0883636984512314e-95
+      },
+      {
+        "feature_id": "cg24724428",
+        "effect_per_decade": 0.2857657508019111,
+        "p_value": 1.0900088678615004e-80,
+        "fdr": 2.3155603384415786e-75
+      },
+      {
+        "feature_id": "cg21572722",
+        "effect_per_decade": 0.11714088046653555,
+        "p_value": 5.692452637697016e-76,
+        "fdr": 8.061841173927771e-71
+      },
+      {
+        "feature_id": "cg06639320",
+        "effect_per_decade": 0.1708237801570505,
+        "p_value": 7.877740061701171e-72,
+        "fdr": 8.367538550037441e-67
+      },
+      {
+        "feature_id": "cg10501210",
+        "effect_per_decade": -0.5249244149941678,
+        "p_value": 2.273040799510892e-66,
+        "fdr": 1.931493688976385e-61
+      },
+      {
+        "feature_id": "cg22454769",
+        "effect_per_decade": 0.2533854113193328,
+        "p_value": 3.0741700606526913e-65,
+        "fdr": 2.1768710561158483e-60
+      },
+      {
+        "feature_id": "cg08234504",
+        "effect_per_decade": -0.10669088829470906,
+        "p_value": 2.1803236298528996e-61,
+        "fdr": 1.3233630008794308e-56
+      },
+      {
+        "feature_id": "cg08097417",
+        "effect_per_decade": 0.15831225186503323,
+        "p_value": 1.1458876591299648e-53,
+        "fdr": 6.085666121681852e-49
+      }
+    ],
+    "result_sha256": "1d6a5fb43636a893c9f97812dd9990d55e8750aa80456fa048a178805e4dfaf8"
+  }
+}

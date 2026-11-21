@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: aging-genomics-lab
+    runtime: docker
+    plan: free
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: AGING_GENOMICS_MODE
+        value: portfolio

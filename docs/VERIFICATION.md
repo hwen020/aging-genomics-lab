@@ -1,4 +1,29 @@
-# P1 verification · Windows · 2026-11-20
+# Local verification · Windows · 2026-11-20
+
+## v0.3.0 acceptance
+
+The extracted v0.2.0 workspace had no recoverable Git metadata. Local baseline commit `2219392` includes the reviewed source, documentation and bundled synthetic demo. The pre-change test run passed 39/39. No remote is configured.
+
+```powershell
+.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.venv\Scripts\python.exe -m pip check
+.venv\Scripts\python.exe -m pytest
+.venv\Scripts\python.exe -m compileall -q src app.py scripts/fetch_public_dataset.py
+.venv\Scripts\python.exe -m aginggenomics.cli public --offline --out output/GSE5086-P2-check
+.venv\Scripts\python.exe -m aginggenomics.cli compare-published --offline
+.venv\Scripts\python.exe -m aginggenomics.cli ewas --offline
+.venv\Scripts\python.exe -m aginggenomics.cli ewas --offline --out output/GSE40279-repeat
+scripts\start_windows.bat
+curl.exe -fsS http://127.0.0.1:8501/_stcore/health
+```
+
+- The seven P1 CSVs are byte-identical to the v0.2.0 run. The independent comparison report links 113 published rows to 219 probe pairs with 196 direction agreements.
+- The GSE40279 matrix was downloaded in full from GEO. The verified cache contains a SHA-256 pinned annotation prefix from the official platform table. A separate live NCBI smoke test resumed a 101-byte bounded artifact from 40 local bytes using an exact 61-byte range.
+- Both offline EWAS runs analyzed 656 samples and generated 424,870 tests and 58,849 BH-FDR hits. All seven output CSVs are byte-identical across runs. On this Windows host, the measured repeat took 134.3 seconds with a peak working set of 601.1 MiB, using Python 3.11.7 and two OpenBLAS threads.
+- The final suite passed **51/51** locally, with 12 new tests. Dependency and compilation checks passed. Chromium verified the Synthetic Demo, both Public Study workflows, loading and rerunning the full EWAS from verified local cache, the PCA/volcano/CpG plots, CpG selection and search, CSV and ZIP downloads, and the published-study comparison. [EWAS overview](screenshots/ewas-overview.png) · [EWAS analysis](screenshots/ewas-analysis.png)
+- Git ignore verification covers raw/cache artifacts, exports, CSV uploads and representative credentials. GitHub Actions is configured to compile, test with small fixtures and run the synthetic CLI on Python 3.10 and 3.12. No hosted workflow was run for this checkout.
+
+## Archived P1 acceptance
 
 ## Workspace baseline
 

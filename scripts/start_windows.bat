@@ -13,7 +13,7 @@ if not exist .venv\Scripts\python.exe (
   )
   if errorlevel 1 goto :fail
 )
-.venv\Scripts\python.exe -c "import aginggenomics, streamlit, plotly, scipy, pytest" >nul 2>nul
+.venv\Scripts\python.exe -c "import aginggenomics, streamlit, plotly, scipy, pytest, xlrd" >nul 2>nul
 if errorlevel 1 (
   echo [2/3] Installing package and dependencies...
   .venv\Scripts\python.exe -m pip install -e ".[dev]"

@@ -14,8 +14,14 @@ from .public_studies import ACCESSION, ANNOTATION, CARD, MATRIX, load_study
 
 def render_public_study(style_fig):
     st.title("Aging Genomics Lab")
-    st.success("PUBLIC STUDY · Human skeletal muscle expression")
-    selection = st.selectbox("GEO study", [ACCESSION, "GSE164471"])
+    st.success("PUBLIC STUDY · GEO")
+    selection = st.selectbox("GEO study", [ACCESSION, "GSE164471", "GSE40279"])
+    if selection == "GSE40279":
+        from .methylation_dashboard import render_methylation
+
+        render_methylation(style_fig)
+        return
+    st.caption("Expression Analysis")
     if selection == "GSE164471":
         st.info("GSE164471 · Skeletal Muscle Transcriptome in Healthy Aging. Gene-level RNA-seq counts "
                 "require an independent count-aware workflow such as DESeq2.")
@@ -140,3 +146,18 @@ def render_public_study(style_fig):
         saved = st.session_state.get("gse5086_export")
         if saved and saved[0] == options:
             st.download_button("Download reproducibility ZIP", saved[1], "GSE5086-report.zip", "application/zip")
+        with st.expander("Published Study Comparison"):
+            st.caption("Compare Zahn Table S2 against the fixed P1 age model at FDR < 0.05.")
+            if st.button("Run published comparison"):
+                from .published_comparison import compare_study
+
+                try:
+                    st.session_state["gse5086_comparison"] = compare_study(study, age)
+                except (OSError, ValueError) as exc:
+                    st.error(str(exc))
+            if comparison := st.session_state.get("gse5086_comparison"):
+                report, pairs, _ = comparison
+                st.markdown(report)
+                st.download_button("Download published comparison", report, "published_comparison.md")
+                st.download_button("Download published probe matches", pairs.to_csv(index=False),
+                                   "published_probe_matches.csv", "text/csv")

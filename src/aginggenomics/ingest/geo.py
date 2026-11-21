@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import urlopen
+from urllib.parse import urlsplit
 
 from ..reporting import sha256
 
@@ -16,10 +17,11 @@ class GeoFile:
     url: str
     digest: str
     max_bytes: int = 25 * 1024 * 1024
+    local_name: str | None = None
 
     @property
     def filename(self):
-        return self.url.rsplit("/", 1)[-1]
+        return self.local_name or urlsplit(self.url).path.rsplit("/", 1)[-1]
 
 
 def acquire(file: GeoFile, cache: Path, *, offline=False):

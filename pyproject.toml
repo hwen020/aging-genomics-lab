@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aging-genomics-lab"
-version = "0.2.0"
-description = "Reproducible exploratory analysis workbench for aging-related gene expression"
+version = "0.3.1"
+description = "Reproducible age-association analysis of public expression and methylation studies"
 requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "MIT" }
@@ -16,6 +16,7 @@ dependencies = [
   "scipy>=1.11,<2",
   "plotly>=5.20,<7",
   "streamlit>=1.36,<2",
+  "xlrd>=2.0.2,<3",
 ]
 
 [project.optional-dependencies]
@@ -23,6 +24,9 @@ dev = ["pytest>=8,<10"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+aginggenomics = ["portfolio_studies.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

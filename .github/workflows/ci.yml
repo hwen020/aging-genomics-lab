@@ -15,7 +15,7 @@ jobs:
       - name: Install
         run: python -m pip install -e ".[dev]"
       - name: Compile
-        run: python -m compileall -q src app.py
+        run: python -m compileall -q src app.py scripts
       - name: Test
         run: pytest
       - name: Smoke CLI
@@ -24,3 +24,18 @@ jobs:
           --expression data/demo/expression.csv
           --metadata data/demo/metadata.csv
           --out output/ci-smoke --simulated --source SYNTHETIC_AGING_DEMO_V1
+      - name: Portfolio health check
+        shell: bash
+        env:
+          AGING_GENOMICS_MODE: portfolio
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          python -m streamlit run app.py --server.address=127.0.0.1 --server.port=8501 > portfolio.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:8501/_stcore/health; then exit 0; fi
+            sleep 1
+          done
+          cat portfolio.log
+          exit 1
